@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mangodb
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: mangodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:5.0.14
+        volumeMounts:
+        - name: mongo-presistent-storage
+          mountPath: /data/db
+      volumes:
+       - name: mongo-presistent-storage
+         hostPath:
+          path: /mnt/some/direcory/structure
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-mongodb
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: mangodb
+
+  ports:
+    - name: mongopod
+      port: 27017
+  type: ClusterIP
