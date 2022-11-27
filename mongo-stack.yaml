@@ -17,13 +17,15 @@ spec:
       - name: mongodb
         image: mongo:5.0.14
         volumeMounts:
-        - name: mongo-presistent-storage
+        - name: mongo-persistent-storage
           mountPath: /data/db
       volumes:
-       - name: mongo-presistent-storage
-         hostPath:
-          path: /mnt/some/direcory/structure
-          type: DirectoryOrCreate
+       - name: mongo-persistent-storage
+          # pointer to the configuration of HOW we want the mount to be implemented
+         persistentVolumeClaim:
+            claimName: mongo-pvc
+     
+       
 
 ---
 apiVersion: v1
