@@ -45,7 +45,7 @@ spec:
       volumes:
         - name: databse-config-volume
           configMap:
-           name: global-database-config-v3
+           name: global-database-config-v4
 ---
 
 apiVersion: apps/v1

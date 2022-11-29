@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: global-database-config-v3
+  name: global-database-config-v4
   namespace: default
 data:
-  DATABASE_URL: https//lskafjalsk
-  DATABASE_PASSWORD: ADMIN
+ database.properties: |
+   databases.url=https//lskafjalsk
+   databases.password=ADMIN
